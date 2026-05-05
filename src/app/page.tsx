@@ -85,7 +85,7 @@ const CLEAN_IMAGES = [
   "/reviews/503481154_9914205358614769_7949723632707157233_n.jpg",
   "/images/166dd2ceb019c976667258222d4bd362e7aaff27-7.jpeg",
   "/reviews/503145111_9914203758614929_6450708904918730460_n.jpg",
-  "/images/0b746d7c580693d493e1eb882b9b98a2d4d3eab6-7.jpeg",
+  "/images/premium_sprinkler.png",
 ];
 
 const CROP_IMAGES = [
