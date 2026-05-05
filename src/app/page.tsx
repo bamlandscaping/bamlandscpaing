@@ -77,20 +77,20 @@ const StarIcon = () => (
 
 /* ── Image lists ── */
 const CLEAN_IMAGES = [
-  "/images/0b746d7c580693d493e1eb882b9b98a2d4d3eab6-4.jpeg",
-  "/images/0b746d7c580693d493e1eb882b9b98a2d4d3eab6-5.jpeg",
-  "/images/0b746d7c580693d493e1eb882b9b98a2d4d3eab6-6.jpeg",
-  "/images/0b746d7c580693d493e1eb882b9b98a2d4d3eab6-7.jpeg",
-  "/images/0b746d7c580693d493e1eb882b9b98a2d4d3eab6-8.jpeg",
-  "/images/0b746d7c580693d493e1eb882b9b98a2d4d3eab6-9.jpeg",
+  "/images/premium_landscaping.png",
+  "/reviews/502975771_9914205051948133_6467113427784241552_n.jpg",
   "/images/166dd2ceb019c976667258222d4bd362e7aaff27-2.jpeg",
-  "/images/166dd2ceb019c976667258222d4bd362e7aaff27-4.jpeg",
+  "/reviews/503373610_9914205361948102_8167385946438133765_n.jpg",
   "/images/0b746d7c580693d493e1eb882b9b98a2d4d3eab6-10.jpeg",
+  "/reviews/503481154_9914205358614769_7949723632707157233_n.jpg",
+  "/images/166dd2ceb019c976667258222d4bd362e7aaff27-7.jpeg",
+  "/reviews/503145111_9914203758614929_6450708904918730460_n.jpg",
+  "/images/0b746d7c580693d493e1eb882b9b98a2d4d3eab6-7.jpeg",
 ];
 
 const CROP_IMAGES = [
   "/images/b976ebfd8d409f4ef1506c9eed049c98344f4629-2.jpeg",
-  "/images/b976ebfd8d409f4ef1506c9eed049c98344f4629-3.jpeg",
+  "/reviews/503382867_9914205318614773_7952993660806714478_n.jpg",
   "/images/b976ebfd8d409f4ef1506c9eed049c98344f4629-1.jpeg",
 ];
 
@@ -228,8 +228,8 @@ export default function Home() {
           <div className="svc-grid">
             <article className="svc-card fade-in">
               <DropletIcon />
-              <h3>Sprinkler Installation &amp; Repair</h3>
-              <p>Complete sprinkler system installation, repair, and seasonal maintenance (startups &amp; winterization blowouts). We design water-efficient irrigation layouts for Denver&apos;s unique climate.</p>
+              <h3>Sprinkler Installation</h3>
+              <p>Complete sprinkler system installation for new and existing yards. We design water-efficient irrigation layouts tailored to Denver&apos;s unique climate.</p>
             </article>
             <article className="svc-card fade-in">
               <TreeIcon />
@@ -253,8 +253,8 @@ export default function Home() {
             </article>
             <article className="svc-card fade-in">
               <BroomIcon />
-              <h3>Sprinkler Cleaning</h3>
-              <p>Seasonal sprinkler system cleanups, maintenance, head adjustments, and year-round property care. Keep your irrigation system working perfectly spring through fall.</p>
+              <h3>Sprinkler Repair</h3>
+              <p>Expert sprinkler repair services including head replacement, leak detection, valve repair, and system troubleshooting to ensure your irrigation works perfectly.</p>
             </article>
           </div>
         </section>
