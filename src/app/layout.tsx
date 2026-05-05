@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 
 const SITE_URL = "https://bamsprinklersco.com";
@@ -105,7 +106,7 @@ const jsonLd = {
         "Denver's premier sprinkler installation, irrigation repair, and full-service landscaping company. We specialize in sprinkler systems, landscape design, sod installation, hardscaping, concrete work, mulch & stone, and seasonal cleanups.",
       url: SITE_URL,
       telephone: `+1${PHONE_LINK}`,
-      email: "bamlandscaping@zohomail.com",
+      email: "bamsprinkers@yahoo.com",
       image: `${SITE_URL}/images/og-cover.jpg`,
       logo: `${SITE_URL}/images/466374738_1092403892489564_859775967574918326_n (1).jpg`,
       priceRange: "$$",
@@ -290,10 +291,9 @@ export default function RootLayout({
         />
 
         {/* Calendly widget (async, non-blocking) */}
-        <script
-          type="text/javascript"
+        <Script
           src="https://assets.calendly.com/assets/external/widget.js"
-          async
+          strategy="afterInteractive"
         />
 
         {/* JSON-LD Structured Data */}

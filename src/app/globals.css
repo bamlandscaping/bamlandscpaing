@@ -294,12 +294,11 @@ body {
 
 .calendly-container {
   max-width: 960px;
-  margin: 0 auto;
+  margin: 40px auto 0;
   border-radius: 16px;
   overflow: hidden;
   background: #fff;
   box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-  transform: translateY(40px); /* Push it down out of the section */
 }
 
 /* ═══════════════════════════════════════
@@ -955,26 +954,29 @@ body {
 
 @media (max-width: 768px) {
   .top-bar {
-    padding: 0 20px;
-    height: 70px;
+    padding: 0 12px;
+    height: 65px;
   }
-  
-  .top-bar-logo span {
-    display: none;
-  }
-  
+
+  .top-bar-logo span,
   .hide-mobile {
     display: none;
   }
-  
+
   .top-bar-actions {
-    gap: 8px;
+    gap: 6px;
+    flex-wrap: nowrap;
   }
   
   .btn-call, .btn-estimate {
-    padding: 8px 12px;
-    font-size: 0.85rem;
+    padding: 7px 10px;
+    font-size: 0.8rem;
+    gap: 4px;
     white-space: nowrap;
+  }
+
+  .top-bar-logo img {
+    height: 42px;
   }
   
   .hero {
