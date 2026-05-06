@@ -90,7 +90,7 @@ const CLEAN_IMAGES = [
 
 const CROP_IMAGES = [
   "/images/b976ebfd8d409f4ef1506c9eed049c98344f4629-2.jpeg",
-  "/reviews/503382867_9914205318614773_7952993660806714478_n.jpg",
+  "/images/166dd2ceb019c976667258222d4bd362e7aaff27-10.jpeg",
   "/images/b976ebfd8d409f4ef1506c9eed049c98344f4629-1.jpeg",
 ];
 
