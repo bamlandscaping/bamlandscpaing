@@ -77,7 +77,7 @@ const StarIcon = () => (
 
 /* ── Image lists ── */
 const CLEAN_IMAGES = [
-  "/images/premium_landscaping.png",
+  "/images/b976ebfd8d409f4ef1506c9eed049c98344f4629-4.jpeg",
   "/reviews/502975771_9914205051948133_6467113427784241552_n.jpg",
   "/images/166dd2ceb019c976667258222d4bd362e7aaff27-2.jpeg",
   "/reviews/503373610_9914205361948102_8167385946438133765_n.jpg",
