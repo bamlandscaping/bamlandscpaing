@@ -85,8 +85,8 @@ export const metadata: Metadata = {
 
   /* ── Icons ── */
   icons: {
-    icon: "/favicon.svg",
-    apple: "/favicon.svg",
+    icon: "/images/466374738_1092403892489564_859775967574918326_n (1).jpg",
+    apple: "/images/466374738_1092403892489564_859775967574918326_n (1).jpg",
   },
 
   /* ── Other ── */
