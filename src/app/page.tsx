@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, FormEvent } from "react";
+import { useState, useEffect, useRef } from "react";
 
 /* ── SVG Icon Components ── */
 const PhoneIcon = () => (
@@ -57,6 +57,13 @@ const MailIcon = () => (
   </svg>
 );
 
+const AwardIcon = () => (
+  <svg className="svc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <circle cx="12" cy="8" r="7"></circle>
+    <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+  </svg>
+);
+
 const PinIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
@@ -94,12 +101,61 @@ const CROP_IMAGES = [
   "/images/b976ebfd8d409f4ef1506c9eed049c98344f4629-1.jpeg",
 ];
 
+const NEW_PICS = [
+  "/new-pics/scan0009.jpg",
+  "/new-pics/scan0003.jpg",
+  "/new-pics/mms_picture_2.jpg",
+  "/new-pics/JOB1.jpg",
+  "/new-pics/IMG_20110703_115335.jpg",
+  "/new-pics/IMG_20110628_175104.jpg",
+  "/new-pics/IMG_20110628_175312.jpg",
+  "/new-pics/IMG_20110628_175047.jpg"
+];
+
+const ALL_IMAGES = Array.from(new Set([
+  ...CLEAN_IMAGES, 
+  ...CROP_IMAGES,
+  ...NEW_PICS,
+  "/reviews/502912142_9914205331948105_7209494311186285293_n.jpg",
+  "/reviews/502975771_9914205051948133_6467113427784241552_n.jpg",
+  "/reviews/502983254_9914205068614798_5317114158553864017_n.jpg",
+  "/reviews/502987390_9914205335281438_2691337993362927510_n.jpg",
+  "/reviews/503145111_9914203758614929_6450708904918730460_n.jpg",
+  "/reviews/503148888_9914205355281436_60515337246255763_n.jpg",
+  "/reviews/503177181_9914205351948103_8781663202471035506_n.jpg",
+  "/reviews/503281854_9914205321948106_7224389482565516111_n.jpg",
+  "/reviews/503290996_9914205315281440_3157806799667862899_n.jpg",
+  "/reviews/503373610_9914205361948102_8167385946438133765_n.jpg",
+  "/reviews/503375538_9914205338614771_4185217370178791656_n.jpg",
+  "/reviews/503382867_9914205318614773_7952993660806714478_n.jpg",
+  "/reviews/503396292_9914205341948104_8446198837122339622_n.jpg",
+  "/reviews/503440019_9914205108614794_6791083051713124524_n.jpg",
+  "/reviews/503440019_9914205408614764_4739763722036637524_n.jpg",
+  "/reviews/503475282_9914205045281467_8851178001700829849_n.jpg",
+  "/reviews/503481154_9914205358614769_7949723632707157233_n.jpg",
+  "/reviews/503490338_9914205295281442_6821182851139914093_n (1).jpg",
+  "/reviews/503521449_9914205055281466_4228955493661922322_n.jpg",
+  "/reviews/503527256_9914205065281465_3281435099068839706_n.jpg",
+  "/reviews/503571622_9914205308614774_7340938070990505608_n.jpg",
+  "/reviews/503626878_9914205311948107_7186393614696423640_n.jpg",
+  "/reviews/503653575_9914205345281437_1892934531992952688_n.jpg",
+  "/reviews/503675730_9914203641948274_8218788070501955909_n.jpg",
+  "/reviews/503726088_9914205281948110_1498331553118040761_n.jpg",
+  "/reviews/503844469_9914205328614772_1178548233980727600_n.jpg"
+]));
+
 const LOGO = "/images/466374738_1092403892489564_859775967574918326_n (1).jpg";
 
 export default function Home() {
-  const [submitted, setSubmitted] = useState(false);
-  const [sending, setSending] = useState(false);
-  const [error, setError] = useState("");
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const handlePlay = () => {
+    if (videoRef.current) {
+      videoRef.current.play();
+      setIsPlaying(true);
+    }
+  };
 
   useEffect(() => {
     // Intersection Observer for fade-in animations
@@ -116,45 +172,18 @@ export default function Home() {
     } else {
        document.querySelectorAll(".fade-in").forEach((el) => el.classList.add("visible"));
     }
+
+    // Load Calendly Script
+    const head = document.querySelector("head");
+    if (head && !document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]')) {
+      const script = document.createElement("script");
+      script.setAttribute("src", "https://assets.calendly.com/assets/external/widget.js");
+      script.setAttribute("async", "true");
+      head.appendChild(script);
+    }
     
     return () => obs.disconnect();
   }, []);
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSending(true);
-    setError("");
-    
-    try {
-      const fd = new FormData(e.currentTarget);
-      const name = fd.get("name") as string;
-      const phone = fd.get("phone") as string;
-      const email = fd.get("email") as string;
-      const service = fd.get("service") as string;
-      const message = fd.get("message") as string;
-      
-      // Basic validation
-      if (!name || !phone || !service || !message) {
-        throw new Error("Please fill in all required fields.");
-      }
-
-      const subject = encodeURIComponent(`New Inquiry from ${name} — BAM Sprinklers`);
-      const body = encodeURIComponent(`Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nService: ${service}\n\nMessage:\n${message}`);
-      
-      window.location.href = `mailto:bamsprinkers@yahoo.com?subject=${subject}&body=${body}`;
-      
-      // Assume success after opening mailto
-      setTimeout(() => { 
-        setSending(false); 
-        setSubmitted(true); 
-        (e.target as HTMLFormElement).reset(); 
-      }, 1000);
-    } catch (err: unknown) {
-      const errorMessage = err instanceof Error ? err.message : "An error occurred. Please try again or call us directly.";
-      setError(errorMessage);
-      setSending(false);
-    }
-  };
 
   return (
     <>
@@ -171,7 +200,7 @@ export default function Home() {
           <a href="tel:7204358409" className="btn-call" id="btn-call-top" aria-label="Call (720) 435-8409">
             <PhoneIcon /> <span className="hide-mobile">Call Now</span>
           </a>
-          <a href="https://calendly.com/bamlandscaping-zohomail/30min" target="_blank" rel="noopener noreferrer" className="btn-estimate" id="btn-estimate-top">
+          <a href="https://calendly.com/bamlandscaping-zohomail/30min?timezone=America/Denver" target="_blank" rel="noopener noreferrer" className="btn-estimate" id="btn-estimate-top">
             <CalendarIcon /> Free Estimate
           </a>
         </nav>
@@ -195,7 +224,7 @@ export default function Home() {
               <a href="tel:7204358409" className="hero-cta">
                 <PhoneIcon /> Call: (720) 435-8409
               </a>
-              <a href="https://calendly.com/bamlandscaping-zohomail/30min" target="_blank" rel="noopener noreferrer" className="hero-cta hero-cta-outline">
+              <a href="https://calendly.com/bamlandscaping-zohomail/30min?timezone=America/Denver" target="_blank" rel="noopener noreferrer" className="hero-cta hero-cta-outline">
                 <CalendarIcon /> Book Estimate
               </a>
             </div>
@@ -211,7 +240,7 @@ export default function Home() {
           <div className="calendly-container fade-in">
             <div
               className="calendly-inline-widget"
-              data-url="https://calendly.com/bamlandscaping-zohomail/30min"
+              data-url="https://calendly.com/bamlandscaping-zohomail/30min?timezone=America/Denver"
               style={{ minWidth: "320px", height: "660px" }}
             />
           </div>
@@ -220,41 +249,58 @@ export default function Home() {
         {/* ═══ SERVICES ═══ */}
         <section className="section" id="services" aria-labelledby="services-heading">
           <div className="text-center">
-            <h2 id="services-heading" className="s-title fade-in">Denver Landscaping &amp; Sprinkler Services</h2>
+            <h2 id="services-heading" className="s-title fade-in" style={{ fontSize: "clamp(1.8rem, 3vw, 2.5rem)", textTransform: 'uppercase' }}>Does Your Home or Business Need a Garden or Sprinkler System?</h2>
             <div className="s-line fade-in" />
-            <p className="s-sub fade-in">Full-service, professional solutions for residential &amp; commercial properties in Colorado.</p>
+            <p className="s-sub fade-in" style={{ maxWidth: '800px', fontSize: '1.2rem', fontWeight: 600, color: '#334155' }}>
+              BAM SPRINKLERS IS A LOCAL COMPANY WITH MORE THAN 25 YEARS SERVICE OF DENVER AND ITS SURROUNDINGS OFFERING OUR SERVICES. BAM SPRINKLERS IS A BBB MEMBER THAT EVALUATES OUR QUALITY. CALL NOW TO REQUEST A COMPLETELY FREE ESTIMATE 720-275-6691 OR 720-435-8409.
+            </p>
           </div>
 
           <div className="svc-grid">
             <article className="svc-card fade-in">
               <DropletIcon />
-              <h3>Sprinkler Installation</h3>
+              <h3>Sprinkler System</h3>
               <p>Complete sprinkler system installation for new and existing yards. We design water-efficient irrigation layouts tailored to Denver&apos;s unique climate.</p>
             </article>
             <article className="svc-card fade-in">
+              <DropletIcon />
+              <h3>Drip System</h3>
+              <p>Targeted drip irrigation systems to efficiently water your plants, trees, and shrubs while conserving water.</p>
+            </article>
+            <article className="svc-card fade-in">
               <TreeIcon />
-              <h3>Landscape Design</h3>
-              <p>Custom landscape design from concept to completion. Flower beds, tree and shrub planting, mulch, rock gardens, and full yard makeovers that boost your home&apos;s curb appeal.</p>
+              <h3>Xeriscaping (Ceroscape)</h3>
+              <p>Water-wise landscaping solutions including native plants, mulch, and rock beds to create a beautiful, low-maintenance garden.</p>
             </article>
             <article className="svc-card fade-in">
               <BrickIcon />
-              <h3>Hardscaping &amp; Concrete</h3>
-              <p>Professional concrete work including stamped concrete, walkways, patios, retaining walls, and steps. Durable, beautiful hardscape features built to withstand Colorado winters.</p>
+              <h3>Stamped &amp; Regular Concrete</h3>
+              <p>Professional concrete work for driveways, patios, walkways, and steps. Durable, beautiful features built to withstand Colorado winters.</p>
             </article>
             <article className="svc-card fade-in">
               <GrassIcon />
-              <h3>Sod Installation &amp; Care</h3>
-              <p>Fresh sod installation for an instant, lush green lawn. We expertly prepare the soil, grade the yard, and lay premium sod suitable for the Denver metro area.</p>
+              <h3>Wooden Fences</h3>
+              <p>High-quality wooden fence installation and repair for privacy, security, and enhanced curb appeal for your property.</p>
+            </article>
+            <article className="svc-card fade-in">
+              <BrickIcon />
+              <h3>Block Retaining Walls</h3>
+              <p>Structural and decorative block retaining walls to manage soil erosion and create dynamic multi-level landscapes.</p>
             </article>
             <article className="svc-card fade-in">
               <RockIcon />
-              <h3>Mulch &amp; Stone</h3>
-              <p>Decorative mulch, gravel pathways, river rock beds, and stone features. Enhance your property with low-maintenance, water-wise landscaping solutions.</p>
+              <h3>Paver Patio, Paths &amp; Side Walls</h3>
+              <p>Custom paver installation for stunning outdoor living spaces, decorative pathways, and elegant side walls.</p>
             </article>
             <article className="svc-card fade-in">
               <BroomIcon />
               <h3>Sprinkler Repair</h3>
-              <p>Expert sprinkler repair services including head replacement, leak detection, valve repair, and system troubleshooting to ensure your irrigation works perfectly.</p>
+              <p>Expert sprinkler repair services including head replacement, leak detection, valve repair, and system troubleshooting.</p>
+            </article>
+            <article className="svc-card fade-in">
+              <AwardIcon />
+              <h3>Quality Service for 25+ Years</h3>
+              <p>Providing expert landscaping and sprinkler solutions for over two decades. A trusted local BBB member bringing you the best in Denver.</p>
             </article>
           </div>
         </section>
@@ -293,31 +339,53 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ═══ GALLERY ═══ */}
+        {/* ═══ GALLERY (OUR WORK) ═══ */}
         <section className="section bg-light" id="gallery" aria-labelledby="gallery-heading">
           <div className="text-center">
-            <h2 id="gallery-heading" className="s-title fade-in">Our Denver Landscaping Projects</h2>
+            <h2 id="gallery-heading" className="s-title fade-in">Our Work</h2>
             <div className="s-line fade-in" />
             <p className="s-sub fade-in">Real projects, real results — see the quality BAM brings to every property.</p>
           </div>
 
-          <div className="gal-grid">
-            {CLEAN_IMAGES.map((src, i) => (
-              <div key={`c-${i}`} className="gal-item fade-in">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={src} alt={`Denver Landscaping Project ${i + 1} by BAM Sprinklers`} loading="lazy" decoding="async" />
+          <div className="gal-video fade-in" style={{ marginBottom: "60px", textAlign: "center" }}>
+            <div style={{ maxWidth: "800px", margin: "0 auto", padding: "20px", border: "4px solid #1e293b", borderRadius: "24px", backgroundColor: "#fff", boxShadow: "0 20px 40px rgba(0,0,0,0.1)" }}>
+              <h3 style={{ fontSize: "1.8rem", color: "#0f172a", marginBottom: "10px", fontWeight: "bold" }}>See Our Premium Denver Sprinkler &amp; Landscaping Services</h3>
+              <p style={{ fontSize: "1.1rem", color: "#475569", marginBottom: "20px" }}>Watch our experienced team in action! We deliver top-tier sprinkler installation, hardscaping, concrete work, and lawn care across the Denver Metro area.</p>
+              
+              <div style={{ position: "relative", borderRadius: "12px", overflow: "hidden", border: "2px solid #e2e8f0" }}>
+                <video ref={videoRef} width="100%" controls playsInline preload="metadata" style={{ display: "block", backgroundColor: "#000" }} onPlay={() => setIsPlaying(true)} onPause={() => setIsPlaying(false)}>
+                  <source src="/new-pics/VID-20260418-WA0027.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                
+                {!isPlaying && (
+                  <div 
+                    onClick={handlePlay}
+                    style={{ position: "absolute", inset: 0, backgroundColor: "rgba(0,0,0,0.3)", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", transition: "all 0.3s ease" }}
+                    aria-label="Play video"
+                  >
+                    <div style={{ width: "80px", height: "80px", backgroundColor: "#2563eb", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 15px rgba(37,99,235,0.4)" }}>
+                      <svg width="40" height="40" viewBox="0 0 24 24" fill="white" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: "5px" }}>
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                      </svg>
+                    </div>
+                  </div>
+                )}
               </div>
-            ))}
-            {CROP_IMAGES.map((src, i) => (
-              <div key={`p-${i}`} className="gal-item crop fade-in">
-                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={src} alt={`Denver Sprinkler Installation ${i + 1}`} loading="lazy" decoding="async" />
+            </div>
+          </div>
+
+          <div className="gal-grid">
+            {ALL_IMAGES.map((src, i) => (
+              <div key={`img-${i}`} className="gal-item fade-in">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={src} alt={`Our Work Project ${i + 1} by BAM Sprinklers`} loading="lazy" decoding="async" />
               </div>
             ))}
           </div>
 
           <div style={{ textAlign: "center", marginTop: "40px" }}>
-            <a href="https://www.facebook.com/p/BAM-Sprinklers-100064053580943/" target="_blank" rel="noopener noreferrer" className="fb-btn" aria-label="Follow BAM Sprinklers on Facebook">
+            <a href="https://www.facebook.com/p/BAM-Sprinklers-100064053580943/" target="_blank" rel="noopener noreferrer" className="fb-btn" aria-label="Follow BAM Sprinklers on Facebook" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: '#1565C0', fontWeight: 'bold' }}>
               <FacebookIcon /> View Our Portfolio on Facebook
             </a>
           </div>
@@ -335,10 +403,6 @@ export default function Home() {
             <div className="rev-grid">
               {[
                 {
-                  text: "The owner Martin is very friendly. But his worker Antonio is a mean and rude.",
-                  author: "Shantell Waters"
-                },
-                {
                   text: "very good service i love the work they did looking forward to doing business with them in the future",
                   author: "Luis Garfias"
                 },
@@ -349,7 +413,7 @@ export default function Home() {
               ].map((rev, i) => (
                 <blockquote key={i} className="rev-card fade-in" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                   <div>
-                    <div className="rev-stars" aria-label="5 out of 5 stars">
+                    <div className="rev-stars" aria-label="5 out of 5 stars" style={{ display: 'flex', flexDirection: 'row', flexWrap: 'nowrap' }}>
                       <StarIcon /><StarIcon /><StarIcon /><StarIcon /><StarIcon />
                     </div>
                     <p>&quot;{rev.text}&quot;</p>
@@ -390,16 +454,16 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ═══ CONTACT FORM ═══ */}
+        {/* ═══ CONTACT US ═══ */}
         <section className="section-alt" id="contact" aria-labelledby="contact-heading">
           <div className="s-inner">
             <div className="text-center">
-              <h2 id="contact-heading" className="s-title fade-in">Get Your Free Quote</h2>
+              <h2 id="contact-heading" className="s-title fade-in">Contact Us</h2>
               <div className="s-line fade-in" />
-              <p className="s-sub fade-in">Fill out the form below and we&apos;ll get back to you within 24 hours.</p>
+              <p className="s-sub fade-in">Get in touch with us today for your free estimate.</p>
             </div>
 
-            <div className="contact-grid">
+            <div style={{ maxWidth: '800px', margin: '0 auto' }}>
               <address className="contact-info fade-in" style={{ fontStyle: 'normal' }}>
                 <h3>Let&apos;s Talk About Your Project</h3>
                 <p>Whether you need a new sprinkler system, a full landscape makeover, concrete work, mulch, stone, or regular lawn maintenance — we&apos;re here to help. Serving the greater Denver metro area with quality work and honest pricing.</p>
@@ -432,58 +496,6 @@ export default function Home() {
                   </div>
                 </div>
               </address>
-
-              <div className="fade-in">
-                {submitted ? (
-                  <div className="c-form success-state">
-                    <div className="form-ok">
-                      <h3>Thank You!</h3>
-                      <p>Your inquiry has been submitted successfully. We&apos;ll get back to you within 24 hours.</p>
-                    </div>
-                  </div>
-                ) : (
-                  <form className="c-form" onSubmit={handleSubmit} id="inquiry-form" aria-label="Inquiry Form">
-                    <h3>Submit Your Inquiry</h3>
-                    
-                    {error && <div className="form-error" role="alert">{error}</div>}
-                    
-                    <div className="fg">
-                      <label htmlFor="name">Full Name <span aria-hidden="true">*</span></label>
-                      <input type="text" id="name" name="name" placeholder="Your full name" required aria-required="true" />
-                    </div>
-                    <div className="fg">
-                      <label htmlFor="phone">Phone Number <span aria-hidden="true">*</span></label>
-                      <input type="tel" id="phone" name="phone" placeholder="(720) 000-0000" required aria-required="true" />
-                    </div>
-                    <div className="fg">
-                      <label htmlFor="email">Email</label>
-                      <input type="email" id="email" name="email" placeholder="your@email.com" />
-                    </div>
-                    <div className="fg">
-                      <label htmlFor="service">Service Needed <span aria-hidden="true">*</span></label>
-                      <select id="service" name="service" required aria-required="true" defaultValue="">
-                        <option value="" disabled>Select a service...</option>
-                        <option value="Sprinkler Installation">Sprinkler Installation</option>
-                        <option value="Sprinkler Repair">Sprinkler Repair</option>
-                        <option value="Irrigation System">Irrigation System</option>
-                        <option value="Landscape Design">Landscape Design</option>
-                        <option value="Sod Installation">Sod Installation</option>
-                        <option value="Concrete / Hardscaping">Concrete / Hardscaping</option>
-                        <option value="Mulch & Stone">Mulch &amp; Stone</option>
-                        <option value="Cleanup / Maintenance">Cleanup / Maintenance</option>
-                        <option value="Other">Other</option>
-                      </select>
-                    </div>
-                    <div className="fg">
-                      <label htmlFor="message">Project Details <span aria-hidden="true">*</span></label>
-                      <textarea id="message" name="message" placeholder="Tell us about your project — what do you need done?" required aria-required="true" />
-                    </div>
-                    <button type="submit" className="btn-submit" id="submit-inquiry" disabled={sending} aria-busy={sending}>
-                      {sending ? "Processing..." : "Submit Inquiry"}
-                    </button>
-                  </form>
-                )}
-              </div>
             </div>
           </div>
         </section>
@@ -494,16 +506,32 @@ export default function Home() {
         <div className="footer-inner">
           <div className="footer-brand">BAM Sprinklers &amp; Landscaping, Inc</div>
           <p>Quality Work. Dependable Service. Beautiful Results.</p>
+          
+          <div className="footer-contact" style={{ margin: "20px 0", lineHeight: "1.8" }}>
+            <strong>Martin Aguilar</strong>, General Manager<br />
+            4861 Tejon St.<br />
+            Denver, CO 80221<br />
+            Fax: 303-964-9457<br />
+            Email: <a href="mailto:bamsprinklers@yahoo.com" style={{ color: "#fff", textDecoration: "underline" }}>bamsprinklers@yahoo.com</a><br />
+            Website: <a href="https://www.Bamsprinklers.com" style={{ color: "#fff", textDecoration: "underline" }}>www.Bamsprinklers.com</a>
+          </div>
+
           <div className="footer-socials">
             <a href="https://www.facebook.com/p/BAM-Sprinklers-100064053580943/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Facebook"><FacebookIcon /></a>
             <a href="tel:7204358409" aria-label="Call us"><PhoneIcon /></a>
-            <a href="mailto:bamsprinkers@yahoo.com" aria-label="Email us"><MailIcon /></a>
+            <a href="mailto:bamsprinklers@yahoo.com" aria-label="Email us"><MailIcon /></a>
           </div>
+
           <p className="footer-legal">
             &copy; {new Date().getFullYear()} BAM Sprinklers &amp; Landscaping, Inc. All rights reserved.<br />
             Denver, Colorado &bull; <a href="tel:7204358409">(720) 435-8409</a> / <a href="tel:7202756691">(720) 275-6691</a><br />
-            <a href="mailto:bamsprinkers@yahoo.com">bamsprinkers@yahoo.com</a>
           </p>
+
+          <div style={{ marginTop: "20px", fontSize: "0.85rem", opacity: 0.8, display: "flex", gap: "15px", justifyContent: "center", flexWrap: "wrap" }}>
+            <a href="/privacy" style={{ color: "#fff", textDecoration: "underline" }}>Privacy Policy</a>
+            <a href="/terms" style={{ color: "#fff", textDecoration: "underline" }}>Terms &amp; Conditions</a>
+            <a href="/cookies" style={{ color: "#fff", textDecoration: "underline" }}>Cookies Policy</a>
+          </div>
         </div>
       </footer>
     </>

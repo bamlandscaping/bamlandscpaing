@@ -571,6 +571,13 @@ body {
   margin-bottom: 20px;
   letter-spacing: 2px;
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+}
+.rev-stars svg {
+  display: inline-block;
+  flex-shrink: 0;
 }
 
 .rev-card p {
