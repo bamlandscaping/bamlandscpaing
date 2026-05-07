@@ -455,7 +455,7 @@ export default function Home() {
             <div className="text-center">
               <h2 id="reviews-heading" className="s-title s-title-light fade-in">Trusted by Colorado Homeowners</h2>
               <div className="s-line fade-in" />
-              <p className="s-sub s-sub-light fade-in">See what our satisfied clients have to say about our work.</p>
+              <p className="s-sub s-sub-light fade-in">See what our satisfied clients have to say about our work!</p>
             </div>
 
             <div className="rev-grid">
