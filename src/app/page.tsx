@@ -84,22 +84,14 @@ const StarIcon = () => (
 
 /* ── Image lists ── */
 const CLEAN_IMAGES = [
-  "/images/b976ebfd8d409f4ef1506c9eed049c98344f4629-4.jpeg",
   "/reviews/502975771_9914205051948133_6467113427784241552_n.jpg",
-  "/images/166dd2ceb019c976667258222d4bd362e7aaff27-2.jpeg",
   "/reviews/503373610_9914205361948102_8167385946438133765_n.jpg",
-  "/images/0b746d7c580693d493e1eb882b9b98a2d4d3eab6-10.jpeg",
   "/reviews/503481154_9914205358614769_7949723632707157233_n.jpg",
-  "/images/166dd2ceb019c976667258222d4bd362e7aaff27-7.jpeg",
   "/reviews/503145111_9914203758614929_6450708904918730460_n.jpg",
   "/images/premium_sprinkler.png",
 ];
 
-const CROP_IMAGES = [
-  "/images/b976ebfd8d409f4ef1506c9eed049c98344f4629-2.jpeg",
-  "/images/166dd2ceb019c976667258222d4bd362e7aaff27-10.jpeg",
-  "/images/b976ebfd8d409f4ef1506c9eed049c98344f4629-1.jpeg",
-];
+
 
 const NEW_PICS = [
   "/new-pics/scan0009.jpg",
@@ -114,7 +106,6 @@ const NEW_PICS = [
 
 const ALL_IMAGES = Array.from(new Set([
   ...CLEAN_IMAGES, 
-  ...CROP_IMAGES,
   ...NEW_PICS,
   "/reviews/502912142_9914205331948105_7209494311186285293_n.jpg",
   "/reviews/502975771_9914205051948133_6467113427784241552_n.jpg",
