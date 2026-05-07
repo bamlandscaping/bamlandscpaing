@@ -137,6 +137,70 @@ const ALL_IMAGES = Array.from(new Set([
 
 const LOGO = "/images/466374738_1092403892489564_859775967574918326_n (1).jpg";
 
+const MORE_PICS = [
+  "/af994bb5a5fbf522ba02ec4d2272be7983f35458-1.jpeg",
+  "/af994bb5a5fbf522ba02ec4d2272be7983f35458-2.jpeg",
+  "/af994bb5a5fbf522ba02ec4d2272be7983f35458-4.jpeg",
+  "/af994bb5a5fbf522ba02ec4d2272be7983f35458-3.jpeg",
+  "/af994bb5a5fbf522ba02ec4d2272be7983f35458-5.jpeg",
+  "/af994bb5a5fbf522ba02ec4d2272be7983f35458-6.jpeg",
+  "/af994bb5a5fbf522ba02ec4d2272be7983f35458-8.jpeg",
+  "/af994bb5a5fbf522ba02ec4d2272be7983f35458-7.jpeg",
+  "/af994bb5a5fbf522ba02ec4d2272be7983f35458-10.jpeg",
+  "/af994bb5a5fbf522ba02ec4d2272be7983f35458-9.jpeg",
+];
+
+function ExpandableGallery() {
+  const [showMorePics, setShowMorePics] = useState(false);
+
+  return (
+    <>
+      <div className="gal-grid">
+        {ALL_IMAGES.map((src, i) => (
+          <div key={`img-${i}`} className={`gal-item fade-in ${showMorePics ? 'visible' : ''}`}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={src} alt={`Our Work Project ${i + 1} by BAM Sprinklers`} loading="lazy" decoding="async" />
+          </div>
+        ))}
+        {showMorePics && MORE_PICS.map((src, i) => (
+          <div 
+            key={`more-img-${i}`} 
+            className="gal-item" 
+            style={{ animation: 'fadeIn 0.6s ease-out forwards' }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={src} alt={`Our Work Additional Project ${i + 1} by BAM Sprinklers`} loading="lazy" decoding="async" />
+          </div>
+        ))}
+      </div>
+
+      {!showMorePics && (
+        <div style={{ textAlign: "center", marginTop: "40px" }}>
+          <button 
+            onClick={() => setShowMorePics(true)} 
+            style={{ 
+              backgroundColor: '#2563eb', 
+              color: 'white', 
+              padding: '14px 32px', 
+              borderRadius: '50px', 
+              fontSize: '1.1rem', 
+              fontWeight: 'bold', 
+              border: 'none', 
+              cursor: 'pointer',
+              boxShadow: '0 4px 15px rgba(37,99,235,0.3)',
+              transition: 'all 0.3s ease'
+            }}
+            onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+            onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+          >
+            See More Pictures
+          </button>
+        </div>
+      )}
+    </>
+  );
+}
+
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -209,6 +273,16 @@ export default function Home() {
           </div>
           <div className="hero-inner fade-in">
             <h1>Denver&apos;s Trusted <span className="accent">Sprinkler &amp; Landscaping</span> Professionals</h1>
+            
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '15px', backgroundColor: 'rgba(255, 255, 255, 0.1)', padding: '12px 24px', borderRadius: '50px', border: '1px solid rgba(255, 255, 255, 0.2)', margin: '10px 0 25px 0', backdropFilter: 'blur(5px)', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/bbb-logo.png" alt="BBB Accredited Business" style={{ height: "45px", width: "auto", backgroundColor: "white", borderRadius: "6px", padding: "4px" }} />
+              <div style={{ textAlign: 'left', lineHeight: '1.2' }}>
+                <div style={{ fontWeight: '800', fontSize: '1.1rem', color: '#fff', textTransform: 'uppercase', letterSpacing: '0.5px' }}>BBB Accredited</div>
+                <div style={{ fontSize: '0.95rem', color: '#fbbf24', fontWeight: '600' }}>Over 25 Years of Excellence</div>
+              </div>
+            </div>
+
             <p>Expert landscaping, sprinkler service, irrigation systems, mulch, and stone work across the Denver metro area.</p>
             
             <div className="hero-actions">
@@ -366,14 +440,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="gal-grid">
-            {ALL_IMAGES.map((src, i) => (
-              <div key={`img-${i}`} className="gal-item fade-in">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={src} alt={`Our Work Project ${i + 1} by BAM Sprinklers`} loading="lazy" decoding="async" />
-              </div>
-            ))}
-          </div>
+          <ExpandableGallery />
 
           <div style={{ textAlign: "center", marginTop: "40px" }}>
             <a href="https://www.facebook.com/p/BAM-Sprinklers-100064053580943/" target="_blank" rel="noopener noreferrer" className="fb-btn" aria-label="Follow BAM Sprinklers on Facebook" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: '#1565C0', fontWeight: 'bold' }}>
@@ -495,7 +562,11 @@ export default function Home() {
       {/* ═══ FOOTER ═══ */}
       <footer className="footer" role="contentinfo">
         <div className="footer-inner">
-          <div className="footer-brand">BAM Sprinklers &amp; Landscaping, Inc</div>
+          <div className="footer-brand" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '15px', flexWrap: 'wrap' }}>
+            BAM Sprinklers &amp; Landscaping, Inc
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/bbb-logo.png" alt="BBB Accredited Business" style={{ height: "48px", width: "auto", backgroundColor: "white", borderRadius: "4px", padding: "4px" }} />
+          </div>
           <p>Quality Work. Dependable Service. Beautiful Results.</p>
           
           <div className="footer-contact" style={{ margin: "20px 0", lineHeight: "1.8" }}>
