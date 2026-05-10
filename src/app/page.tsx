@@ -16,7 +16,7 @@ function ServiceAreaMap() {
 
       const map = L.default.map(mapRef.current, {
         center: [39.7392, -104.9903],
-        zoom: 10,
+        zoom: 9,
         scrollWheelZoom: false,
         attributionControl: true,
       });
@@ -34,13 +34,6 @@ function ServiceAreaMap() {
         radius: 40000,
         weight: 2,
       }).addTo(map);
-
-      const icon = L.default.divIcon({
-        html: `<div style="background:#1565C0;color:#fff;padding:6px 14px;border-radius:8px;font-weight:700;font-size:13px;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,0.3);border:2px solid #fff;">BAM Sprinklers HQ</div>`,
-        className: "",
-        iconAnchor: [60, 20],
-      });
-      L.default.marker([39.78, -105.0], { icon }).addTo(map);
 
       mapInstance.current = map;
     });
