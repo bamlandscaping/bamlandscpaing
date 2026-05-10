@@ -2,52 +2,6 @@
 
 import { useState, useEffect, useRef } from "react";
 
-/* ── Service Area Map Component ── */
-function ServiceAreaMap() {
-  const mapRef = useRef<HTMLDivElement>(null);
-  const mapInstance = useRef<unknown>(null);
-
-  useEffect(() => {
-    if (!mapRef.current || mapInstance.current) return;
-
-    import("leaflet").then((L) => {
-      import("leaflet/dist/leaflet.css");
-      if (!mapRef.current) return;
-
-      const map = L.default.map(mapRef.current, {
-        center: [39.7392, -104.9903],
-        zoom: 9,
-        scrollWheelZoom: false,
-        attributionControl: true,
-      });
-
-      L.default.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        subdomains: "abcd",
-        maxZoom: 19,
-      }).addTo(map);
-
-      L.default.circle([39.7392, -104.9903], {
-        color: "#1565C0",
-        fillColor: "#1E88E5",
-        fillOpacity: 0.12,
-        radius: 40000,
-        weight: 2,
-      }).addTo(map);
-
-      mapInstance.current = map;
-    });
-
-    return () => {
-      if (mapInstance.current) {
-        (mapInstance.current as { remove: () => void }).remove();
-        mapInstance.current = null;
-      }
-    };
-  }, []);
-
-  return <div ref={mapRef} className="map-container fade-in" />;
-}
 
 /* ── SVG Icon Components ── */
 const PhoneIcon = () => (
@@ -571,9 +525,8 @@ export default function Home() {
             <div className="text-center">
               <h2 id="map-heading" className="s-title fade-in">Our Service Area</h2>
               <div className="s-line fade-in" />
-              <p className="s-sub fade-in">We proudly serve the entire Denver metro area — up to a 1-hour drive from our location.</p>
+              <p className="s-sub fade-in" style={{ fontSize: '1.2rem', fontWeight: 600 }}>We proudly serve a 60-mile radius around Denver.</p>
             </div>
-            <ServiceAreaMap />
             <div className="map-cities fade-in">
               {["Denver", "Arvada", "Aurora", "Lakewood", "Littleton", "Westminster", "Thornton", "Broomfield", "Highlands Ranch", "Centennial", "Commerce City", "Englewood"].map(city => (
                 <span key={city} className="map-city-tag">{city}</span>
@@ -643,7 +596,6 @@ export default function Home() {
             <strong>Martin Aguilar</strong>, General Manager<br />
             4861 Tejon St.<br />
             Denver, CO 80221<br />
-            Fax: 303-964-9457<br />
             Email: <a href="mailto:bamsprinklers@yahoo.com" style={{ color: "#fff", textDecoration: "underline" }}>bamsprinklers@yahoo.com</a><br />
             Website: <a href="https://www.Bamsprinklers.com" style={{ color: "#fff", textDecoration: "underline" }}>www.Bamsprinklers.com</a>
           </div>
