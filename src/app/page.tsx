@@ -2,6 +2,60 @@
 
 import { useState, useEffect, useRef } from "react";
 
+/* ── Service Area Map Component ── */
+function ServiceAreaMap() {
+  const mapRef = useRef<HTMLDivElement>(null);
+  const mapInstance = useRef<unknown>(null);
+
+  useEffect(() => {
+    if (!mapRef.current || mapInstance.current) return;
+
+    import("leaflet").then((L) => {
+      import("leaflet/dist/leaflet.css");
+      if (!mapRef.current) return;
+
+      const map = L.default.map(mapRef.current, {
+        center: [39.7392, -104.9903],
+        zoom: 10,
+        scrollWheelZoom: false,
+        attributionControl: true,
+      });
+
+      L.default.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        subdomains: "abcd",
+        maxZoom: 19,
+      }).addTo(map);
+
+      L.default.circle([39.7392, -104.9903], {
+        color: "#1565C0",
+        fillColor: "#1E88E5",
+        fillOpacity: 0.12,
+        radius: 40000,
+        weight: 2,
+      }).addTo(map);
+
+      const icon = L.default.divIcon({
+        html: `<div style="background:#1565C0;color:#fff;padding:6px 14px;border-radius:8px;font-weight:700;font-size:13px;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,0.3);border:2px solid #fff;">BAM Sprinklers HQ</div>`,
+        className: "",
+        iconAnchor: [60, 20],
+      });
+      L.default.marker([39.78, -105.0], { icon }).addTo(map);
+
+      mapInstance.current = map;
+    });
+
+    return () => {
+      if (mapInstance.current) {
+        (mapInstance.current as { remove: () => void }).remove();
+        mapInstance.current = null;
+      }
+    };
+  }, []);
+
+  return <div ref={mapRef} className="map-container fade-in" />;
+}
+
 /* ── SVG Icon Components ── */
 const PhoneIcon = () => (
   <svg className="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -54,6 +108,12 @@ const BroomIcon = () => (
 const MailIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/>
+  </svg>
+);
+
+const ChatBubbleIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
   </svg>
 );
 
@@ -264,17 +324,14 @@ export default function Home() {
       <main id="main-content">
         {/* ═══ HERO SECTION ═══ */}
         <section className="hero" id="home">
-          <div style={{ position: 'absolute', inset: 0, opacity: 0.05, pointerEvents: 'none', display: 'flex', flexWrap: 'wrap', overflow: 'hidden', justifyContent: 'space-around', alignContent: 'space-around' }}>
-            {Array.from({ length: 40 }).map((_, i) => (
-              <div key={i} style={{ padding: '30px', color: '#fff', transform: `rotate(${i * 15}deg)` }}>
-                {i % 2 === 0 ? <DropletIcon /> : <GrassIcon />}
-              </div>
-            ))}
-          </div>
           <div className="hero-inner fade-in">
+            <div className="hero-logo-showcase">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={LOGO} alt="BAM Sprinklers & Landscaping Logo" />
+            </div>
             <h1>Denver&apos;s Trusted <span className="accent">Sprinkler &amp; Landscaping</span> Professionals</h1>
             
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '15px', backgroundColor: 'rgba(255, 255, 255, 0.1)', padding: '12px 24px', borderRadius: '50px', border: '1px solid rgba(255, 255, 255, 0.2)', margin: '10px 0 25px 0', backdropFilter: 'blur(5px)', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '15px', backgroundColor: 'rgba(255, 255, 255, 0.12)', padding: '12px 24px', borderRadius: '50px', border: '1px solid rgba(255, 255, 255, 0.25)', margin: '10px 0 25px 0', backdropFilter: 'blur(10px)', boxShadow: '0 4px 20px rgba(0,0,0,0.2)' }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/bbb-logo.png" alt="BBB Accredited Business" style={{ height: "45px", width: "auto", backgroundColor: "white", borderRadius: "6px", padding: "4px" }} />
               <div style={{ textAlign: 'left', lineHeight: '1.2' }}>
@@ -289,8 +346,11 @@ export default function Home() {
               <a href="tel:7204358409" className="hero-cta">
                 <PhoneIcon /> Call: (720) 435-8409
               </a>
-              <a href="https://calendly.com/bamlandscaping-zohomail/30min?timezone=America/Denver" target="_blank" rel="noopener noreferrer" className="hero-cta hero-cta-outline">
-                <CalendarIcon /> Book Estimate
+              <a href="sms:7204358409" className="hero-cta" style={{ background: '#16a34a' }}>
+                <ChatBubbleIcon /> Text Us
+              </a>
+              <a href="https://calendly.com/bamlandscaping-zohomail/30min?timezone=America/Denver" target="_blank" rel="noopener noreferrer" className="hero-cta hero-cta-book">
+                <CalendarIcon /> Book Your Estimate
               </a>
             </div>
           </div>
@@ -508,6 +568,23 @@ export default function Home() {
             <div className="faq-item">
               <h3>What areas do you serve?</h3>
               <p>We proudly serve the entire Denver metro area, including Denver, Arvada, Aurora, Lakewood, Littleton, Westminster, Thornton, Broomfield, Highlands Ranch, and Centennial.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══ SERVICE AREA MAP ═══ */}
+        <section className="map-section" id="service-area" aria-labelledby="map-heading">
+          <div className="s-inner">
+            <div className="text-center">
+              <h2 id="map-heading" className="s-title fade-in">Our Service Area</h2>
+              <div className="s-line fade-in" />
+              <p className="s-sub fade-in">We proudly serve the entire Denver metro area — up to a 1-hour drive from our location.</p>
+            </div>
+            <ServiceAreaMap />
+            <div className="map-cities fade-in">
+              {["Denver", "Arvada", "Aurora", "Lakewood", "Littleton", "Westminster", "Thornton", "Broomfield", "Highlands Ranch", "Centennial", "Commerce City", "Englewood"].map(city => (
+                <span key={city} className="map-city-tag">{city}</span>
+              ))}
             </div>
           </div>
         </section>
