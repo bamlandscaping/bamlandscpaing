@@ -1099,6 +1099,20 @@ body {
     line-height: 1.5;
   }
   
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .hero-actions .hero-cta {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 14px 20px;
+    font-size: 1rem;
+  }
+  
   .section, .section-dark, .section-alt {
     padding: 50px 20px;
   }
@@ -1140,17 +1154,6 @@ body {
 @media (max-width: 480px) {
   .hero h1 {
     font-size: 1.8rem;
-  }
-  
-  .hero-actions {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .hero-actions .btn-primary,
-  .hero-actions .btn-secondary {
-    width: 100%;
-    justify-content: center;
   }
 }
 
