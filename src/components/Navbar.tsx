@@ -56,12 +56,9 @@ export default function Navbar() {
         }`}
       >
         <div className="max-w-[1200px] mx-auto px-5 flex items-center justify-between">
-          {/* Logo */}
           <a href="#hero" className={`font-heading font-extrabold text-xl flex items-center gap-2 transition-colors duration-300 ${scrolled ? "text-dark" : "text-white"}`}>
-            <span className="w-9 h-9 bg-green rounded-lg flex items-center justify-center shrink-0">
-              <LeafIcon />
-            </span>
-            <span>Perdomo&apos;s Landscaping</span>
+            <img src="/logo.jpg" alt="BAM Sprinklers Logo" className="w-10 h-10 rounded-lg object-contain" />
+            <span>BAM Sprinklers & Landscaping</span>
           </a>
 
           {/* Desktop Nav Links */}
@@ -111,11 +108,11 @@ export default function Navbar() {
 
             {/* Phone CTA (desktop) */}
             <a
-              href="tel:6789087752"
+              href="tel:7204358409"
               className="hidden md:flex items-center gap-1.5 px-5 py-2 bg-green text-white rounded-md font-semibold text-sm transition-all duration-300 hover:bg-green-dark hover:-translate-y-px"
             >
               <PhoneIcon />
-              <span>678-908-7752</span>
+              <span>720-435-8409</span>
             </a>
 
             {/* Hamburger (mobile) */}
@@ -153,7 +150,7 @@ export default function Navbar() {
           onClick={closeMobile}
           className="font-heading text-2xl font-bold text-dark transition-colors duration-300 hover:text-green-dark flex items-center gap-2"
         >
-          <PhoneIcon /> 678-908-7752
+          <PhoneIcon /> 720-435-8409
         </a>
         <div className="flex gap-3 mt-2.5">
           <button

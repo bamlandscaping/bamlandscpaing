@@ -57,11 +57,11 @@ export default function Contact() {
 
     if (!name || !phone || !email || !service) return;
 
-    const subject = encodeURIComponent("New Quote Request — Perdomo's Landscaping");
+    const subject = encodeURIComponent("New Quote Request — BAM Sprinklers & Landscaping");
     const body = encodeURIComponent(
       `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nService: ${service}\nMessage: ${message}`
     );
-    window.location.href = `mailto:perdomoslandscapingllc@email.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:info@bamsprinklers.com?subject=${subject}&body=${body}`;
 
     setShowSuccess(true);
     setTimeout(() => {
@@ -142,7 +142,7 @@ export default function Contact() {
                 </div>
                 <div className="text-[0.95rem]">
                   <strong className="block font-semibold text-dark">{t("info_phone_label")}</strong>
-                  <a href="tel:6789087752" className="text-green-dark font-semibold hover:underline">678-908-7752</a>
+                  <a href="tel:7204358409" className="text-green-dark font-semibold hover:underline">720-435-8409</a>
                 </div>
               </div>
               <div className="flex items-center gap-3.5 py-2.5 border-b border-[#eee]">
@@ -151,7 +151,7 @@ export default function Contact() {
                 </div>
                 <div className="text-[0.95rem]">
                   <strong className="block font-semibold text-dark">Instagram</strong>
-                  <a href="https://www.instagram.com/perdomosllc/" target="_blank" rel="noopener noreferrer" className="text-green-dark font-semibold hover:underline">@perdomosllc</a>
+                  <a href="https://www.instagram.com/bamsprinklers/" target="_blank" rel="noopener noreferrer" className="text-green-dark font-semibold hover:underline">@bamsprinklers</a>
                 </div>
               </div>
               <div className="flex items-center gap-3.5 py-2.5">

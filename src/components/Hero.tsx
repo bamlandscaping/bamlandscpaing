@@ -27,7 +27,7 @@ export default function Hero() {
           {t("hero_badge")}
         </div>
         <h1 className="text-[clamp(2.2rem,6vw,4rem)] font-heading font-extrabold text-white mb-2.5 leading-[1.1]">
-          Perdomo&apos;s Landscaping LLC
+          BAM Sprinklers & Landscaping
         </h1>
         <p className="text-[clamp(1.05rem,2.5vw,1.35rem)] text-white/85 mb-9 font-normal">
           {t("hero_tagline")}
@@ -40,7 +40,7 @@ export default function Hero() {
             {t("hero_cta_quote")}
           </a>
           <a
-            href="tel:6789087752"
+            href="tel:7204358409"
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-md font-semibold text-base bg-transparent text-white border-2 border-white transition-all duration-300 hover:bg-white hover:text-green-dark"
           >
             <PhoneIcon /> {t("hero_cta_call")}

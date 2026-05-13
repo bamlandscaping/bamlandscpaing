@@ -23,9 +23,9 @@ export default function Footer() {
       <div className="max-w-[1200px] mx-auto px-5">
         <div className="flex items-center justify-between flex-wrap gap-4 max-md:flex-col max-md:text-center">
           {/* Logo */}
-          <div className="font-heading font-bold text-lg text-white">
-            <LeafIcon />
-            Perdomo&apos;s Landscaping LLC
+          <div className="font-heading font-bold text-lg text-white flex items-center gap-2">
+            <img src="/logo.jpg" alt="BAM Sprinklers Logo" className="w-8 h-8 rounded object-contain" />
+            BAM Sprinklers & Landscaping
           </div>
 
           {/* Links */}
@@ -44,7 +44,7 @@ export default function Footer() {
           {/* Social */}
           <div className="flex gap-3">
             <a
-              href="https://www.instagram.com/perdomosllc/"
+              href="https://www.instagram.com/bamsprinklers/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
@@ -55,7 +55,7 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              href="tel:6789087752"
+              href="tel:7204358409"
               aria-label="Call us"
               className="w-10 h-10 bg-white/[0.08] rounded-full flex items-center justify-center text-white/70 transition-all duration-300 hover:bg-green hover:text-white"
             >
@@ -67,7 +67,7 @@ export default function Footer() {
         </div>
 
         <div className="text-center mt-6 pt-6 border-t border-white/[0.08] text-[0.85rem]">
-          <p>&copy; 2026 Perdomo&apos;s Landscaping LLC. {t("footer_rights")} {t("footer_serving")}</p>
+          <p>&copy; 2026 BAM Sprinklers & Landscaping. {t("footer_rights")} {t("footer_serving")}</p>
         </div>
       </div>
     </footer>
