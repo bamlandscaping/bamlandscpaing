@@ -78,8 +78,9 @@ export default function Footer() {
           <p>&copy;   2026 BAM Sprinklers & Landscaping. {t("footer_rights")} {t("footer_serving")}</p>
         </div>
 
-        {/* Subtle Stackmode backlink with schema markup */}
-        <div className="text-center mt-10 pt-8 border-t border-white/[0.08]">
+        {/* Bottom footer with Stackmode backlink and WhatsApp */}
+        <div className="mt-10 pt-8 border-t border-white/[0.08] flex items-center justify-between gap-4 max-md:flex-col max-md:text-center">
+          {/* Subtle Stackmode backlink with schema markup */}
           <a
             href="https://stackmode.net"
             target="_blank"
@@ -95,6 +96,20 @@ export default function Footer() {
             <meta itemProp="url" content="https://stackmode.net" />
             <meta itemProp="sameAs" content="https://stackmode.net" />
             <span itemProp="description" style={{ display: 'none' }}>Professional web design and development by Stackmode Network</span>
+          </a>
+
+          {/* WhatsApp Button */}
+          <a
+            href="https://wa.me/17204358409?text=Hi%20BAM%20Sprinklers%2C%20I%20have%20a%20question"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Message us on WhatsApp"
+            className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:bg-green-600 hover:scale-110"
+            title="Message us on WhatsApp"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.782 1.176c-1.592.887-2.949 2.287-3.821 3.93-.394.644-.613 1.351-.637 2.076a9.995 9.995 0 001.373 5.084l.602 1.048-2.552.701 1.119-3.231c-.397.591-.714 1.25-.857 1.948-.032.151-.053.303-.062.456-.079 1.410.299 2.758 1.065 3.862 1.671 2.433 4.512 3.996 7.635 3.996 1.226 0 2.423-.207 3.566-.613 2.122-.766 3.942-2.265 5.146-4.263 1.204-1.997 1.87-4.35 1.87-6.78 0-2.429-.666-4.783-1.87-6.78-1.204-1.998-3.024-3.497-5.146-4.263-1.143-.406-2.34-.613-3.566-.613z" />
+            </svg>
           </a>
         </div>
       </div>
