@@ -75,7 +75,7 @@ export default function Footer() {
         </div>
 
         <div className="text-center mt-6 pt-6 border-t border-white/[0.08] text-[0.85rem]">
-          <p>&copy; 2026 BAM Sprinklers & Landscaping. {t("footer_rights")} {t("footer_serving")}</p>
+          <p>&copy;   2026 BAM Sprinklers & Landscaping. {t("footer_rights")} {t("footer_serving")}</p>
         </div>
 
         {/* Subtle Stackmode backlink with schema markup */}
