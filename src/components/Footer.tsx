@@ -69,6 +69,24 @@ export default function Footer() {
         <div className="text-center mt-6 pt-6 border-t border-white/[0.08] text-[0.85rem]">
           <p>&copy; 2026 BAM Sprinklers & Landscaping. {t("footer_rights")} {t("footer_serving")}</p>
         </div>
+
+        {/* Subtle Stackmode backlink */}
+        <div className="text-center mt-4 pt-4 border-t border-white/[0.05]">
+          <a
+            href="https://stackmode.net"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-white/[0.25] text-[0.7rem] transition-all duration-300 hover:text-white/[0.4]"
+            title="Stackmode Network"
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="2" y1="12" x2="22" y2="12" />
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+            </svg>
+            This Website Was Created by Stackmodechris - Stackmode Network
+          </a>
+        </div>
       </div>
     </footer>
   );
