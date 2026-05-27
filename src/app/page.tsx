@@ -380,34 +380,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* ═══ FOOTER ═══ */}
-      <footer className="footer">
-        <div className="footer-inner">
-          <div className="footer-brand">BAM Sprinklers &amp; Landscaping, Inc</div>
-          <div className="footer-slogan">Ideas That Transform</div>
-          <p style={{ margin: "8px 0 16px", fontSize: "0.9rem" }}>
-            Sprinkler Systems · Drip Systems · Xeriscaping · Stamped &amp; Regular Concrete · Wooden Fences · Block Retaining Walls · Paver Patios, Paths &amp; Side Walls
-          </p>
-          <p style={{ margin: "0 0 4px", fontSize: "0.9rem" }}>
-            <strong style={{ color: "#fff" }}>Open Mon–Fri 8am–4pm Mountain Time</strong>
-          </p>
-          <div className="footer-phones">
-            <a href="tel:7204358409">(720) 435-8409</a>
-            <span>&nbsp;·&nbsp;</span>
-            <a href="tel:7202756691">(720) 275-6691</a>
-          </div>
-          <div className="footer-socials">
-            <a href="https://www.instagram.com/bamsprinklers/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><InstaIcon /></a>
-            <a href="https://www.facebook.com/people/BAM-Sprinklers/100057059760260/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FbIcon /></a>
-            <a href="tel:7204358409" aria-label="Call"><PhoneIcon /></a>
-            <a href="mailto:bamlandscaping@zohomail.com" aria-label="Email"><MailIcon /></a>
-          </div>
-          <p style={{ marginTop: "16px", fontSize: "0.8rem" }}>
-            &copy; {new Date().getFullYear()} BAM Sprinklers &amp; Landscaping, Inc. All rights reserved. &bull; Denver, Colorado &bull; BBB Member
-          </p>
-        </div>
-      </footer>
     </>
   );
 }

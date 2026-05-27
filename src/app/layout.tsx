@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Footer from "@/components/Footer";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 export const metadata: Metadata = {
   title: "BAM Sprinklers & Landscaping | Denver, CO — Sprinkler Systems, Xeriscaping, Concrete & More",
@@ -115,7 +117,12 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <LanguageProvider>
+          {children}
+          <Footer />
+        </LanguageProvider>
+      </body>
     </html>
   );
 }
