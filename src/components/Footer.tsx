@@ -27,7 +27,7 @@ export default function Footer() {
   const { t } = useLanguage();
 
   return (
-    <footer className="bg-dark text-white/70 py-10">
+    <footer className="bg-dark text-white/85 py-10">
       <div className="max-w-[1200px] mx-auto px-5">
         <div className="flex items-center justify-between flex-wrap gap-4 max-md:flex-col max-md:text-center">
           {/* Logo */}
@@ -42,7 +42,7 @@ export default function Footer() {
               <a
                 key={link.key}
                 href={link.href}
-                className="text-sm text-white/60 transition-colors duration-300 hover:text-green-light"
+                className="text-sm text-white/80 transition-colors duration-300 hover:text-green-light"
               >
                 {t(link.key)}
               </a>
@@ -86,7 +86,7 @@ export default function Footer() {
               href="https://stackmode.net"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-4 py-2 text-white/[0.38] text-[0.72rem] tracking-wide transition-all duration-300 hover:text-white/[0.55] rounded-lg hover:bg-white/[0.02]"
+              className="inline-flex items-center gap-1.5 px-4 py-2 text-white/60 text-[0.72rem] tracking-wide transition-all duration-300 hover:text-white/75 rounded-lg hover:bg-white/[0.02]"
               title="Website created by Stackmode Network - Stackmodechris"
               itemProp="url"
             >
