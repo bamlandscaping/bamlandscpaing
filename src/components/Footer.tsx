@@ -79,7 +79,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom footer with Stackmode backlink and WhatsApp */}
-        <div className="mt-10 pt-8 border-t border-white/[0.08] flex items-center justify-between gap-4 max-md:flex-col max-md:text-center">
+        <div className="mt-10 pt-8 border-t border-white/[0.08] flex items-center justify-center gap-4 max-md:flex-col max-md:text-center">
           {/* Subtle Stackmode backlink with schema markup */}
           <div itemScope itemType="https://schema.org/Organization" style={{ display: 'contents' }}>
             <a
