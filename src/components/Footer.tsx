@@ -8,6 +8,14 @@ const LeafIcon = () => (
   </svg>
 );
 
+const GlobeIcon = () => (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10" />
+    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+    <circle cx="12" cy="12" r="1" fill="currentColor" />
+  </svg>
+);
+
 const navLinks = [
   { href: "#about", key: "nav_about" },
   { href: "#services", key: "nav_services" },
@@ -70,21 +78,21 @@ export default function Footer() {
           <p>&copy; 2026 BAM Sprinklers & Landscaping. {t("footer_rights")} {t("footer_serving")}</p>
         </div>
 
-        {/* Subtle Stackmode backlink */}
-        <div className="text-center mt-4 pt-4 border-t border-white/[0.05]">
+        {/* Subtle Stackmode backlink with schema markup */}
+        <div className="text-center mt-8 pt-6 border-t border-white/[0.03]">
           <a
             href="https://stackmode.net"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-white/[0.25] text-[0.7rem] transition-all duration-300 hover:text-white/[0.4]"
-            title="Stackmode Network"
+            className="inline-flex items-center gap-1 px-3 py-1.5 text-white/[0.22] text-[0.65rem] tracking-wide transition-all duration-300 hover:text-white/[0.35] rounded-full"
+            title="Website created by Stackmode Network"
+            itemScope
+            itemType="https://schema.org/Organization"
           >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="10" />
-              <line x1="2" y1="12" x2="22" y2="12" />
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-            </svg>
-            This Website Was Created by Stackmodechris - Stackmode Network
+            <GlobeIcon />
+            <span itemProp="name">This Website Was Created by Stackmodechris - Stackmode Network</span>
+            <meta itemProp="url" content="https://stackmode.net" />
+            <meta itemProp="sameAs" content="https://stackmode.net" />
           </a>
         </div>
       </div>

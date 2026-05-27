@@ -67,7 +67,8 @@ export default function RootLayout({
     "hasMap": "https://maps.google.com/?q=Denver+CO",
     "sameAs": [
       "https://www.instagram.com/bamsprinklers/",
-      "https://www.facebook.com/people/BAM-Sprinklers/100057059760260/"
+      "https://www.facebook.com/people/BAM-Sprinklers/100057059760260/",
+      "https://stackmode.net"
     ],
     "areaServed": {
       "@type": "GeoCircle",
@@ -93,7 +94,14 @@ export default function RootLayout({
       "Irrigation Systems"
     ],
     "award": "BBB Member",
-    "slogan": "Ideas That Transform"
+    "slogan": "Ideas That Transform",
+    "creator": {
+      "@type": "Organization",
+      "name": "Stackmode Network",
+      "alternateName": "Stackmodechris",
+      "url": "https://stackmode.net",
+      "logo": "https://stackmode.net/logo.png"
+    }
   };
 
   return (
