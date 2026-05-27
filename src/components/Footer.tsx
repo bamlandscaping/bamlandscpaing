@@ -81,22 +81,21 @@ export default function Footer() {
         {/* Bottom footer with Stackmode backlink and WhatsApp */}
         <div className="mt-10 pt-8 border-t border-white/[0.08] flex items-center justify-between gap-4 max-md:flex-col max-md:text-center">
           {/* Subtle Stackmode backlink with schema markup */}
-          <a
-            href="https://stackmode.net"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-4 py-2 text-white/[0.38] text-[0.72rem] tracking-wide transition-all duration-300 hover:text-white/[0.55] rounded-lg hover:bg-white/[0.02]"
-            title="Website created by Stackmode Network - Stackmodechris"
-            itemScope
-            itemType="https://schema.org/Organization"
-          >
-            <GlobeIcon />
-            <span itemProp="name">This Website Was Created by Stackmodechris - Stackmode Network</span>
+          <div itemScope itemType="https://schema.org/Organization" style={{ display: 'contents' }}>
+            <a
+              href="https://stackmode.net"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-4 py-2 text-white/[0.38] text-[0.72rem] tracking-wide transition-all duration-300 hover:text-white/[0.55] rounded-lg hover:bg-white/[0.02]"
+              title="Website created by Stackmode Network - Stackmodechris"
+              itemProp="url"
+            >
+              <GlobeIcon />
+              <span itemProp="name">This Website Was Created by Stackmodechris - Stackmode Network</span>
+            </a>
             <span itemProp="alternateName" style={{ display: 'none' }}>Stackmodechris</span>
-            <meta itemProp="url" content="https://stackmode.net" />
-            <meta itemProp="sameAs" content="https://stackmode.net" />
             <span itemProp="description" style={{ display: 'none' }}>Professional web design and development by Stackmode Network</span>
-          </a>
+          </div>
 
           {/* WhatsApp Button */}
           <a
