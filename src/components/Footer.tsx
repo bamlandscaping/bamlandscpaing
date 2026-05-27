@@ -79,20 +79,22 @@ export default function Footer() {
         </div>
 
         {/* Subtle Stackmode backlink with schema markup */}
-        <div className="text-center mt-8 pt-6 border-t border-white/[0.03]">
+        <div className="text-center mt-10 pt-8 border-t border-white/[0.08]">
           <a
             href="https://stackmode.net"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 px-3 py-1.5 text-white/[0.22] text-[0.65rem] tracking-wide transition-all duration-300 hover:text-white/[0.35] rounded-full"
-            title="Website created by Stackmode Network"
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-white/[0.38] text-[0.72rem] tracking-wide transition-all duration-300 hover:text-white/[0.55] rounded-lg hover:bg-white/[0.02]"
+            title="Website created by Stackmode Network - Stackmodechris"
             itemScope
             itemType="https://schema.org/Organization"
           >
             <GlobeIcon />
             <span itemProp="name">This Website Was Created by Stackmodechris - Stackmode Network</span>
+            <span itemProp="alternateName" style={{ display: 'none' }}>Stackmodechris</span>
             <meta itemProp="url" content="https://stackmode.net" />
             <meta itemProp="sameAs" content="https://stackmode.net" />
+            <span itemProp="description" style={{ display: 'none' }}>Professional web design and development by Stackmode Network</span>
           </a>
         </div>
       </div>
